@@ -1,0 +1,12 @@
+:host-context() {
+  font-family: "Roboto", "Segoe UI", "GeezaPro", "DejaVu Serif", "sans-serif",
+    "-apple-system", "BlinkMacSystemFont";
+}
+
+li {
+  margin-bottom: 1em;
+}
+
+.error {
+  color: red;
+}

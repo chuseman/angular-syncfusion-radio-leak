@@ -1,0 +1,49 @@
+<h2>Reproduction steps</h2>
+<ol>
+	<li>
+		Click to
+		<button ejs-button (click)="showRadioDialog()">
+      Show Radio Dialog
+    </button>
+		to open the editor dialog.
+	</li>
+	<li>Click <b>Save and Close</b> button inside the dialog footer.</li>
+	<li>
+		Click to
+		<button ejs-button (click)="resetRadio()">
+      Reset Radio Group
+    </button>
+		to reset the values of the form.
+	</li>
+	<li>
+		Observe error in console every time you click to reset the radio group:
+		<pre class="error">TypeError: Cannot read property 'value' of null
+    at RadioButtonComponent.e.twoWaySetter (form-base.js:58)</pre>
+	</li>
+	<li [formGroup]="form">
+		(Optional) You can check this box to clone the form when replacing it (step 2) to workaround the bug:
+		<ejs-checkbox formControlName="clone" label="Clone radio FormGroup"></ejs-checkbox>
+	</li>
+</ol>
+
+<pre>form.value = {{ form.value | json }}</pre>
+
+<ejs-dialog #radioDialog header="Radio" width="75%" [height]="400" [closeOnEscape]="true" [isModal]="true"
+	[visible]="false" [showCloseIcon]="true">
+	<ng-template #content>
+		<form [formGroup]="radioDialogForm" *ngIf="radioDialogForm">
+			<div>
+				<ejs-radiobutton formControlName="value" label="Yes" [value]="true"></ejs-radiobutton>
+			</div>
+			<div>
+				<ejs-radiobutton formControlName="value" label="No" [value]="false"></ejs-radiobutton>
+			</div>
+			<pre>radioDialogForm.value = {{ radioDialogForm.value | json }}</pre>
+		</form>
+	</ng-template>
+	<ng-template #footerTemplate>
+		<button ejs-button (click)="closeRadioDialog()">
+      Save and Close
+    </button>
+	</ng-template>
+</ejs-dialog>
